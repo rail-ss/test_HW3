@@ -1,0 +1,28 @@
+name: Python Tests
+
+on: [push, pull_request]  # Запускать при push и pull request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # ОС для тестов
+    
+    steps:
+    # 1. Загружаем код из репозитория
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    # 2. Устанавливаем Python
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    # 3. Устанавливаем зависимости
+    - name: Install dependencies
+      run: |
+        pip install flask
+    
+    # 4. Запускаем тесты
+    - name: Run tests
+      run: |
+        python tests.py
